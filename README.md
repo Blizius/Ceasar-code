@@ -1,1 +1,10 @@
-# Ceasar-code
+# Ceasarova šifra
+
+## Funkce
+Program pro šifrování a dešifrování Ceasarovy šifry, což je jednoduše záměna každého písmene v texty za písmeno, které se nachází o daný počet míst v abecedě jinde, většinou směrem doprava. Na začátku je třeba zdůraznit, že v textu smí být používána krom mezer jen znaky základní latinské abecedy, tedy 26 znaků A - Z, velká či malá, avšak bez diakritiky, interpunkce, či jiných speciálních znaků. Poté již uživatel zadá zda chce šifrovat (číslo 0) nebo dešifrovat (číslo 1), počet míst v abecedě, o které se budou znaky posouvat (1 - 25, jiné hodnoty jsou jen periodickým opakováním) a konečně samotný text (šifrovaný nebo k zašifrování). Pokud uživatel dodrží všechny pokyny, program proběhne a vypíše šifrovaný nebo dešifrovaný text, vše v malých písmenech.
+
+## Funčnost
+Program funguje pro všechny vstupy uvedené výše nebo přímo v programu. Text může být libovolně dlouhý, ale může obsahovat pouze výše uvedené znaky, jinak je program ukončen s chybou. To samé platí pro nesprávné zadání parametrů. Nezáleží na velkých a malých písmenech, všechna jsou programem převedena na malá a výsledek tedy obsahuje pouze malá písmena a mezery, což je pro šifrování a dešifrování více než dostačující.
+
+## Implementace
+V hlavní funkci se po vypsání úvodní informace volají postupně funkce pro načtení parametrů a textu uživatelem. Všechny možné chyby, či nesmyslné vstupy jsou zachyceny nebo ošetřeny podmínkami a program v jejich případě skončí chybou i s hlášením. Při přečtení textu se rovnou převede do pole charů (znaků), které se v daklší funkci převede na pole písmenům odpovídajícím intů (celých čísel) dle ASCII a upraví, aby písmeno A mělo hodnotu 1 a Z hodnotu 26 (odečtením 96 od hodnot znaků dle ASCII). Mezera tak nabyde hodnoty -64. Zde se také zkontroluje, zda všechny znaky jsou v intervalu -64 a 1 - 26. Poté je již volána funkce, která všechny hodnoty zvýší (při výběru šifrování) nebo sníží (při výběru dešifrování) o zadanou hodnotu. Pokud hodnota překročí 26 nebo je menší než 1, odečtením respektive přičtením 26 se hodnota dostane opět do intervalu na správné místo posunu (interval na konci pokračuje opět začátkem). Pak se jen vrátí přičtením 96 všechny hodnoty na odpovídající hodnoty znaků dle ASCII a vypýše se výsledný text.
