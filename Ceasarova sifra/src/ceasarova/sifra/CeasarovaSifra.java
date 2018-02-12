@@ -26,14 +26,14 @@ public class CeasarovaSifra {
         System.out.println("V tomto programu při psaní TEXTU používejte jen základní latinskou abecedu"
                 + " tj. 26 písmen bez diakritiky, interpunkce a jiných speciálních znaků a čísel. Mezery požívat můžete.");
         
-        int type = type();        
-        int shift = shift();        
+        int dir = readDir();        
+        int shift = readShift();        
         System.out.println("Napiště text.");
         char []text = readText();
         int []letters = charToInt(text);
         
-        if (type == 0){
-            code(letters, shift);
+        if (dir == 0){
+            encode(letters, shift);
         }
         else{
             decode(letters, shift);
@@ -85,14 +85,14 @@ public class CeasarovaSifra {
      * Fce pro zjištění, zda uživatel chce šifrovad nebo dešifrovat
      * @return 0 pro šifrování nebo 1 pro dešifrování
      */
-    public static int type (){
+    public static int readDir (){
         System.out.println("Napište 0 pro šifrování nebo 1 pro dešifrování textu.");
-        int type = readInt();
-        if (type != 0 && type != 1){
+        int dir = readInt();
+        if (dir != 0 && dir != 1){
             System.err.println("Zadal jste něco jiného než 1 nebo 0.");
             System.exit(1);
         }
-        return type;
+        return dir;
     }
     /**
      * Konverze znaků abecedy na čísla dle ASCII a upravení na hodnoty 1 - 26
@@ -122,7 +122,7 @@ public class CeasarovaSifra {
      * @param letters upravené číselné hodnoty znaků abecedy (výstup fce charToInt)
      * @param shift celočíselná hodnota posunu písmen v Ceasarově šifře
      */
-    public static void code (int [] letters, int shift){
+    public static void encode (int [] letters, int shift){
         for (int i = 0; i < letters.length; i++){
             if (letters [i] != -64){
                 letters [i] += shift;
@@ -137,7 +137,7 @@ public class CeasarovaSifra {
      * Fce pro zadání kontrole správného zadání posunu v Ceasarově šifře
      * @return int hodnota posunu (1 - 25)
      */
-    public static int shift (){
+    public static int readShift (){
         System.out.println("Napište celým číslem od 1 do 25 posunutí písmen v Ceasarově šifře.");
         int shift = readInt();
         if (shift < 1 || shift > 25){
